@@ -103,7 +103,7 @@ plt.ylabel('Target y')
 <details close>
     <summary>Mathematical derivation</summary>
     
-<img width="1017" alt="image" src="https://user-images.githubusercontent.com/66216181/110224619-bc118a80-7ea2-11eb-9477-bc0eb45c1d6e.png">
+<img width="600" alt="image" src="https://user-images.githubusercontent.com/66216181/110228014-4669e680-7ec3-11eb-8f7c-bdf3d16519ab.png">
 
     
 </details>
@@ -338,3 +338,89 @@ ax.set_title('3D-Visualization')
 # Logistic Regression from Scratch
 
 Logistic regression in the simplest classification model, and it is often considered as the building block of neural networks.
+
+```python
+from sklearn.datasets import make_classification
+data = make_classification(n_samples=300,n_features=1,n_informative=1, n_redundant=0,n_clusters_per_class=1,random_state=4)
+X = data[0]
+y = data[1].reshape(-1,1)
+plt.plot(X,y,'o')
+```
+<p align="center">
+<img width="400", alt="image" src="https://user-images.githubusercontent.com/66216181/110228074-d314a480-7ec3-11eb-9e26-c9cf4e5102c9.png">
+</p>
+
+<details close>
+    <summary>Mathematical derivation</summary>
+ <p align="center">
+<img width="600", alt="image" src="https://user-images.githubusercontent.com/66216181/110228287-8fbb3580-7ec5-11eb-91b1-276b8544fac3.png">
+</p>  
+</details>
+
+```python
+# Propose a model ==> (w,b)
+np.random.seed(42)
+w = np.random.randn(1)
+b = np.random.randn(1)
+
+# Get output using the proposed model ==> ŷ 
+def sigmoid(input):
+    return 1/(1+np.exp(-input))
+y_hat = sigmoid(X * w + b)  
+
+# Evaluate performance of the initial model ==> Cross Entropy
+cost = - sum(y * np.log(y_hat) + (1 - y) * np.log(1 - y_hat))/len(X)
+print('Cost of initial model: {}'.format(cost[0]))
+
+#Gradient descent, update (w,b)
+w = w - 1 * (-1/len(X) * sum((y - y_hat) * X))
+b = b - 1 * (-1/len(X) * sum(y - y_hat))
+
+# Re-evaluation after 1-step gradient descent
+y_hat = sigmoid(X * w + b) 
+cost = - sum(y * np.log(y_hat) + (1 - y) * np.log(1 - y_hat))/len(X)
+print('Cost of initial model: {}'.format(cost[0]))
+
+#How about 50 steps:
+loss = [0.47441666,0.40120507]
+for i in range(48):
+    w = w - 1 * (-1/len(X) * sum((y - y_hat) * X))#0.3 is the learning rate for w
+    b = b - 1 * (-1/len(X) * sum(y - y_hat))
+    y_hat = sigmoid(X * w + b) 
+    cost = - sum(y * np.log(y_hat) + (1 - y) * np.log(1 - y_hat))/len(X)
+    loss.append(cost)
+    if (i + 2) % 10 == 0:
+        print('Cost of {}-step model: {}'.format(i+2,cost[0]))
+    
+    
+print('Final model: w = {}, b = {}'.format(w[0],b[0]))
+```
+
+```
+Cost of initial model: 0.4758919497866085
+Cost of initial model: 0.35993527399552555
+Cost of 10-step model: 0.14083923937680098
+Cost of 20-step model: 0.0974768205256391
+Cost of 30-step model: 0.07903043468721682
+Cost of 40-step model: 0.06850834864785582
+Final model: w = 3.8450567371871887, b = 0.3648425287090521
+```
+As expected, the cost drops monotonically.
+
+```python
+plt.plot(np.arange(50),loss,'bo-')
+plt.xlabel('Number of iterations')
+plt.ylabel('Cost')
+```
+ <p align="center">
+<img width="400", alt="image" src="https://user-images.githubusercontent.com/66216181/110228194-da887d80-7ec4-11eb-8555-f88623cb1299.png">
+</p> 
+
+Let's see what the sigmoid function look like.
+```python
+plt.plot(X,y,'o')
+plt.plot(X,y_hat,'.')
+```
+ <p align="center">
+<img width="400", alt="image" src="https://user-images.githubusercontent.com/66216181/110228226-102d6680-7ec5-11eb-98c3-e87cf269d0ac.png">
+</p> 
