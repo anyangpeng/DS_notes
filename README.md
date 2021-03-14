@@ -81,9 +81,9 @@ Contour lines have a much greater chance of intersecting a square on the axis th
 - [Linear Regression](#Linear-Regression-from-Scratch)
 - [Logistic Regression](#Logistic-Regression-from-Scratch)
 - [Support Vector Machine](#Support-Vector-Machine)
-- [Decision Tree & Random Forest](#Decision-Tree-&-Random-Forest)
 - [K- Nearest Neighbor](#K-Nearest-Neighbors)
 - [Naive Bayes](#Naive-Bayes)
+- [Decision Tree & Random Forest](#Decision-Tree-&-Random-Forest)
 
 
 
@@ -692,3 +692,231 @@ plt.ylim(7,15)
 <img width="360", alt="image" src="https://user-images.githubusercontent.com/66216181/110887770-7bee4580-82b0-11eb-8e5b-336a15289f55.png">
 </p>
 
+# K-Nearest Neighbors 
+
+K-Nearest Neighbors (KNN) is a very representative instance-based supervised learning algorithm, where new instances are predicted based on their similarity or "distance" from the training instances. Unlike the model based machine learning algorithms, it does not optimize model parameters through gradient descent.
+
+### Classification
+For classification, the new instance is labeled as the most frequent class in its kNN, like a voting process.
+
+```python
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.datasets import make_blobs
+
+X, y =  make_blobs(n_samples=100, n_features=2, centers=4, cluster_std=1.5, random_state=42)
+
+x1 = X[:,0]
+x2 = X[:,1]
+sns.scatterplot(x1,x2,hue=y,palette='Set2',)
+plt.xlabel('x1')
+plt.ylabel('x2')
+```
+<p align="center">
+<img width="360", alt="image" src="https://user-images.githubusercontent.com/66216181/111084974-277edc00-84e3-11eb-886d-7a3da581f743.png">
+</p>
+
+```python
+#Set parameters
+dis_power = 2
+num_neighbors = 5
+
+# Calculating the distance between new intstance and training instance
+def cal_dis(x_new, x_train, power = dis_power):
+    dis = 0
+    for dim in range(len(x_train)):
+        dis += abs(x_train[dim]-x_new[dim])**power
+    return dis**(1/power)
+
+# Find K nearest neighbors
+def get_knn(x_new, X, power = dis_power, k = num_neighbors):
+    dis = []
+
+    for i in range(len(X)):
+        dis.append(cal_dis(x_new, X[i], power))
+
+    dis_sort = pd.DataFrame(dis,columns=['distance'])
+    dis_sort.sort_values('distance',inplace=True)
+    return list(dis_sort.head(k).index)
+    
+# Calculating the target value using KNN.
+def pred(x_new, X, power = dis_power, k = num_neighbors):
+    y_pred =[]
+    for i in x_new:
+        y_knn = []
+        for j in get_knn(i, X, power, k):
+            y_knn.append(y[j])
+        y_pred.append(max(set(y_knn), key=y_knn.count))
+    return y_pred
+```
+
+```python
+a = np.arange(-13, 8, 0.1)
+b = np.arange(-10, 11, 0.1)
+aa, bb = np.meshgrid(a, b)
+abpairs = np.dstack([aa, bb]).reshape(-1, 2)
+
+clf = pred(abpairs, X, power = dis_power, k = num_neighbors)
+
+h = plt.contourf(a,b,np.array(clf).reshape(210,210))
+sns.scatterplot(x1,x2,hue=y,palette='Set2',)
+plt.xlabel('x1')
+plt.ylabel('x2')
+plt.ylim(-10,11)
+```
+<p align="center">
+<img width="360", alt="image" src="https://user-images.githubusercontent.com/66216181/111085010-4f6e3f80-84e3-11eb-940f-e78f9c0ee34a.png">
+</p>
+
+### Regression
+For regression, the target value of the new instance is the mean of all target values of its KNN.
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+# Creating training data with noise
+np.random.seed(42)
+X = np.linspace(1,10,100) + 2*np.random.randn(100)
+y = 0.2 * X**3 + X**2 -4*X -7 + 5*np.random.randn(100)
+plt.plot(X,y,'bo')
+plt.xlabel('X')
+plt.ylabel('y')
+X = X.reshape(-1,1)
+y = y.reshape(-1,1)
+```
+<p align="center">
+<img width="360", alt="image" src="https://user-images.githubusercontent.com/66216181/111085039-847a9200-84e3-11eb-8c0c-0941f9cc1a7e.png">
+</p>
+
+```python
+#Set parameters
+dis_power = 2
+num_neighbors = 5
+
+# Calculating the distance between new intstance and training instance
+def cal_dis(x_new, x_train, power = dis_power):
+    dis = 0
+    for dim in range(len(x_train)):
+        dis += abs(x_train[dim]-x_new[dim])**power
+    return dis**(1/power)
+
+# Find K nearest neighbors
+def get_knn(x_new, X, power = dis_power, k = num_neighbors):
+    dis = []
+
+    for i in range(len(X)):
+        dis.append(cal_dis(x_new, X[i], power))
+
+    dis_sort = pd.DataFrame(dis,columns=['distance'])
+    dis_sort.sort_values('distance',inplace=True)
+    return list(dis_sort.head(k).index)
+    
+# Calculating the target value using KNN.
+def pred(x_new, X, power = dis_power, k = num_neighbors):
+    y_pred =[]
+    for i in x_new:
+        y_knn = []
+        for j in get_knn(i, X, power, k):
+            y_knn.append(y[j])
+        y_pred.append(np.mean(y_knn))
+    return y_pred
+```
+
+```python
+X = np.linspace(1,10,100) + 2*np.random.randn(100)
+y = 0.2 * X**3 + X**2 -4*X -7 + 5*np.random.randn(100)
+plt.plot(X,y,'bo')
+plt.xlabel('X')
+plt.ylabel('y')
+X = X.reshape(-1,1)
+y = y.reshape(-1,1)
+plt.plot(np.linspace(0,15,100).reshape(-1,1),
+         pred(np.linspace(0,15,100).reshape(-1,1),X,2,5),'r-',linewidth=2.5)
+```
+<p align="center">
+<img width="360", alt="image" src="https://user-images.githubusercontent.com/66216181/111085070-aaa03200-84e3-11eb-9333-a7a37151fe39.png">
+</p>
+
+# Naive Bayes
+Naive Bayes is a conditional probability model mostly used for classification problem. 
+
+```python
+import seaborn as sns
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import make_blobs
+
+X, y =  make_blobs(n_samples=100, n_features=2, centers=4, cluster_std=1.5, random_state=42)
+
+x1 = X[:,0]
+x2 = X[:,1]
+sns.scatterplot(x1,x2,hue=y,palette='Set2',)
+plt.xlabel('x1')
+plt.ylabel('x2')
+```
+
+<p align="center">
+<img width="360", alt="image" src="https://user-images.githubusercontent.com/66216181/111084974-277edc00-84e3-11eb-886d-7a3da581f743.png">
+</p>
+
+<details close>
+    <summary>Mathematical derivation</summary>
+    
+<p align="center">
+<img width="1204", alt="image" src="https://user-images.githubusercontent.com/66216181/111085123-f2bf5480-84e3-11eb-80ac-9b0e31ec3f0d.png">
+</p>   
+
+</details>
+
+```python
+# Training process, calculate probability density function for each feature in each class.
+def cal_stat(X,y):
+    all_class = np.unique(y)
+    n_class = len(all_class)
+    n_sample, n_feat = X.shape
+    stat_mean = np.zeros((n_class, n_feat))
+    stat_var = np.zeros((n_class, n_feat))
+    priors = np.zeros(n_class)
+
+    for i, c in enumerate(all_class):
+        stat_mean[i,:] = X[np.where(y==c)].mean(axis=0)
+        stat_var[i,:] = X[np.where(y==c)].var(axis=0)
+    return stat_mean, stat_var
+
+# Use the PDF to find the class to which the new instance most likely belongs.
+def NaiveBayes(x_new, X, y):
+    stat_mean, stat_var = cal_stat(X,y)
+    log_likelihood = np.zeros((len(np.unique(y)), X.shape[1]))
+    log_prior = np.log((np.bincount(y)[np.bincount(y)!=0]/len(y))).reshape(-1,1)
+
+    res = []
+
+    for x_i in x_new:
+        for i, c in enumerate(np.unique(y)):
+            log_likelihood[i,:] = np.log(np.exp(- (x_i - stat_mean[i,:])**2 / 
+                                                (2 * stat_var[i,:])) / np.sqrt(2 * np.pi * stat_var[i,:]))
+        posterior = log_prior + log_likelihood.sum(axis=1).reshape(-1,1)
+        res. append(np.unique(y)[np.argmax(posterior)])
+    return res
+
+```
+
+```python
+a = np.arange(-13, 8, 0.1)
+b = np.arange(-10, 11, 0.1)
+aa, bb = np.meshgrid(a, b)
+abpairs = np.dstack([aa, bb]).reshape(-1, 2)
+clf = NaiveBayes(abpairs, X, y)
+
+h = plt.contourf(a,b,np.array(clf).reshape(210,210))
+sns.scatterplot(x1,x2,hue=y,palette='Set2',)
+plt.xlabel('x1')
+plt.ylabel('x2')
+plt.ylim(-10,11)
+```
+
+<p align="center">
+<img width="360", alt="image" src="https://user-images.githubusercontent.com/66216181/111085164-2b5f2e00-84e4-11eb-8b2b-4722930d760d.png">
+</p>   
