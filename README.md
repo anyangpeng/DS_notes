@@ -32,7 +32,7 @@ Imagine that the mathematical expression of our hypothesis f(x) contains a coeff
     
 <br>
 <p align="center">
-<img width="400", alt="image" src="https://user-images.githubusercontent.com/66216181/110220826-e016a100-7e8d-11eb-90ee-5c7cda936b19.png">
+<img width="360", alt="image" src="https://user-images.githubusercontent.com/66216181/110220826-e016a100-7e8d-11eb-90ee-5c7cda936b19.png">
 </p>    
 </details>
 <br>
@@ -52,7 +52,7 @@ Overfitting or underfitting is a term commonly used to describe the performance 
 A more complicated model is needed if in the case of underfitting; while a simpler model or regularization is needed in the case of overfitting.
 <br>
 <p align="center">
-<img width="600", alt="image" src="https://user-images.githubusercontent.com/66216181/110220463-8319eb80-7e8b-11eb-8199-3bf85c54a0e5.png">
+<img width="360", alt="image" src="https://user-images.githubusercontent.com/66216181/110220463-8319eb80-7e8b-11eb-8199-3bf85c54a0e5.png">
 </p>
 </details>
 <br>
@@ -73,7 +73,7 @@ L2 regularization:
 Contour lines have a much greater chance of intersecting a square on the axis than a circle. This means L1 regularization tends to completely remove some features (feature selection) by setting w to 0, L2 rarely remove features.
     
 <p align="center">
-<img width="600", alt="image" src="https://user-images.githubusercontent.com/66216181/110222803-8d8fb180-7e9a-11eb-85bc-b2faa21c9a4d.png">
+<img width="360", alt="image" src="https://user-images.githubusercontent.com/66216181/110222803-8d8fb180-7e9a-11eb-85bc-b2faa21c9a4d.png">
 </p>
 </details>
 
@@ -107,7 +107,7 @@ plt.xlabel("Input X")
 plt.ylabel('Target y')
 ```
 <p align="center">
-<img width="600", alt="image" src="https://user-images.githubusercontent.com/66216181/110224502-df880580-7ea1-11eb-8c1d-80c3ca5502dd.png">
+<img width="360", alt="image" src="https://user-images.githubusercontent.com/66216181/110224502-df880580-7ea1-11eb-8c1d-80c3ca5502dd.png">
 </p>
 
 <details close>
@@ -182,7 +182,7 @@ plt.ylabel('MSE')
 ```
 
 <p align="center">
-<img width="600", alt="image" src="https://user-images.githubusercontent.com/66216181/110224654-0266e980-7ea3-11eb-8d65-16be016d9b87.png">
+<img width="360", alt="image" src="https://user-images.githubusercontent.com/66216181/110224654-0266e980-7ea3-11eb-8d65-16be016d9b87.png">
 </p>
 
 The loss drops monotonically after each iteration, and eventually plateaus to the global minimum. The parameters are optimized from the randomly initialized values. Let's see how the final model predicts the data.
@@ -193,7 +193,7 @@ plt.plot(X,y,'b.')
 plt.plot(X,y_hat,'r',linewidth=3)
 ```
 <p align="center">
-<img width="600", alt="image" src="https://user-images.githubusercontent.com/66216181/110224673-33dfb500-7ea3-11eb-97c7-da1ab45ede57.png">
+<img width="360", alt="image" src="https://user-images.githubusercontent.com/66216181/110224673-33dfb500-7ea3-11eb-97c7-da1ab45ede57.png">
 </p>
 
 ### n Independent variable --> m Dependent variable
@@ -230,7 +230,7 @@ ax.set_title('3D-Visualization')
 ```
 
 <p align="center">
-<img width="600", alt="image" src="https://user-images.githubusercontent.com/66216181/110224750-f2033e80-7ea3-11eb-97c3-0727b4ffa2da.png">
+<img width="360", alt="image" src="https://user-images.githubusercontent.com/66216181/110224750-f2033e80-7ea3-11eb-97c3-0727b4ffa2da.png">
 </p>
 
 <details close>
@@ -306,7 +306,7 @@ plt.ylabel('MSE')
 ```
 
 <p align="center">
-<img width="600", alt="image" src="https://user-images.githubusercontent.com/66216181/110224788-4efef480-7ea4-11eb-8d80-3fade808ef12.png">
+<img width="360", alt="image" src="https://user-images.githubusercontent.com/66216181/110224788-4efef480-7ea4-11eb-8d80-3fade808ef12.png">
 </p>
 
 ```python
@@ -342,7 +342,7 @@ ax.set_title('3D-Visualization')
 
 ```
 <p align="center">
-<img width="600", alt="image" src="https://user-images.githubusercontent.com/66216181/110224815-9be2cb00-7ea4-11eb-8206-96dd896abade.png">
+<img width="360", alt="image" src="https://user-images.githubusercontent.com/66216181/110224815-9be2cb00-7ea4-11eb-8206-96dd896abade.png">
 </p>
 
 # Logistic Regression from Scratch
@@ -357,7 +357,7 @@ y = data[1].reshape(-1,1)
 plt.plot(X,y,'o')
 ```
 <p align="center">
-<img width="400", alt="image" src="https://user-images.githubusercontent.com/66216181/110228074-d314a480-7ec3-11eb-9e26-c9cf4e5102c9.png">
+<img width="360", alt="image" src="https://user-images.githubusercontent.com/66216181/110228074-d314a480-7ec3-11eb-9e26-c9cf4e5102c9.png">
 </p>
 
 <details close>
@@ -423,7 +423,7 @@ plt.xlabel('Number of iterations')
 plt.ylabel('Cost')
 ```
  <p align="center">
-<img width="400", alt="image" src="https://user-images.githubusercontent.com/66216181/110228194-da887d80-7ec4-11eb-8555-f88623cb1299.png">
+<img width="360", alt="image" src="https://user-images.githubusercontent.com/66216181/110228194-da887d80-7ec4-11eb-8555-f88623cb1299.png">
 </p> 
 
 Let's see what the sigmoid function look like.
@@ -432,7 +432,7 @@ plt.plot(X,y,'o')
 plt.plot(X,y_hat,'.')
 ```
  <p align="center">
-<img width="400", alt="image" src="https://user-images.githubusercontent.com/66216181/110228226-102d6680-7ec5-11eb-98c3-e87cf269d0ac.png">
+<img width="360", alt="image" src="https://user-images.githubusercontent.com/66216181/110228226-102d6680-7ec5-11eb-98c3-e87cf269d0ac.png">
 </p> 
 
 # Support Vector Machine
