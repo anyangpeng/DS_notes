@@ -40,7 +40,7 @@ Imagine that the mathematical expression of our hypothesis f(x) contains a coeff
 <details close>
     <summary>Training, validation, and test sets</summary>
     
-**Training set** refers to the data provided during optimization; while **Validation set**refers to new data that the model have not seen during the training, it's often used for hyper-parameter tuning (learning rate, regularization coefficient, etc.). There is often another type of data called **Test set**, which is solely used for reporting model performance after the model has been locked.
+**Training set** refers to the data provided during optimization; while **Validation set** refers to new data that the model have not seen during the training, it's often used for hyper-parameter tuning (learning rate, regularization coefficient, etc.). There is often another type of data called **Test set**, which is solely used for reporting model performance after the model has been locked.
 <br>
 </details>
 <br>
@@ -65,10 +65,10 @@ Regularization generally refers to the process of suppressing overfitting. There
 Using the linear regression with L1, L2 regularization as an example. Look at the figure below, the red dot is the global minimum for the cost function represented by the elliptical contours without regularization. The model corresponding to this global minimum is overfitted, so we have to move to an adjacent point where it also satisfies the constraint on the weight represented by the square or circle. 
     
 L1 regularization:
-    $ |w<sub>1</sub>| + |w<sub>2</sub>| < constraint $
+     |w<sub>1</sub>| + |w<sub>2</sub>| < constraint 
     
 L2 regularization:
-    $ |w<sub>1</sub>|<sup>2</sup> + |w<sub>2</sub>|<sup>2</sup> < constraint $
+     |w<sub>1</sub>|<sup>2</sup> + |w<sub>2</sub>|<sup>2</sup> < constraint 
  
 Contour lines have a much greater chance of intersecting a square on the axis than a circle. This means L1 regularization tends to completely remove some features (feature selection) by setting w to 0, L2 rarely remove features.
     
