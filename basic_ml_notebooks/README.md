@@ -1,6 +1,6 @@
 ## A Collection of ML Algorithm Notebooks
 ### Table of Contents
-1. [Linear Models](./1_Linear_Models.ipynb)
+1. [Linear Models](./1_Linear_Models.ipynb)    
     1.1 [Gradient Descent](./1_1_Gradient_Descent.ipynb)
 2. [Nonlinear Models](./2_Nonlinear_Models.ipynb)
 3. [Decision Trees](./3_Decision_Trees.ipynb)
