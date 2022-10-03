@@ -1,10 +1,11 @@
 ## A Collection of ML Algorithm Notebooks
 ### Table of Contents
-1. [Linear Models](./1_Linear_Model.ipynb)
-2. [Clustering](./2_Clustering.ipynb)
+1. [Linear Models](./1_Linear_Models.ipynb)
+    1.1 [Gradient Descent](./1_1_Gradient_Descent.ipynb)
+2. [Nonlinear Models](./2_Nonlinear_Models.ipynb)
 3. [Decision Trees](./3_Decision_Trees.ipynb)
-4. [Random Forests](./4_Random_Forests.ipynb)
-5. [Gradient Descent](./5_Gradient_Descent.ipynb)
+4. [Ensemble Methods](./4_Ensemble_Methods_Random_Forests.ipynb)
+5. [Clustering](./5_Clustering.ipynb)
 6. [Support Vector Machine](./6_Support_Vector_Machine.ipynb)
 7. [Bayesian](./7_Bayesian.ipynb)
 8. [Manifold](./8_Manifold.ipynb)
