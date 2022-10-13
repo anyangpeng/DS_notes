@@ -15,7 +15,7 @@ This notebook contains frequently used Pandas commands for data preprocessing an
 ### Miscellaneous
 
 - Install Pandas:
-  - pip install pandas (and ! at the begining in jupyter notebook)
+  - pip install pandas (add **'!'** at the begining in jupyter notebook)
   - pip install pandas=='version id' (a specific version)
 - Version:
   - print(pandas.\_\_version\_\_)
@@ -52,6 +52,15 @@ This notebook contains frequently used Pandas commands for data preprocessing an
 
 ### Filtering & Indexing
 
+    Commands used to select a subgroup of the dataframe.
+
+- Indexing:
+  - df.iloc(): using integer location, exclusive when slicing, can use **_np.r\__** to represent multiple slice
+  - df.loc(): using label, inclusive when slicing
+- Filtering:
+  - boolean indexing
+  - df.query()
+  
 ### Grouping & Aggregation
 
 ### Merging
