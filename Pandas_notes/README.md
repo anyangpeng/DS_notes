@@ -49,6 +49,7 @@ This notebook contains frequently used Pandas commands for data preprocessing an
 - df.size: # of cell
 - df.info(): summary of dataframe
 - df.describe(): return statistics of numeric columns
+- df.dtypes: return data types of each column
 
 ### Filtering & Indexing
 
@@ -60,12 +61,33 @@ This notebook contains frequently used Pandas commands for data preprocessing an
 - Filtering:
   - boolean indexing
   - df.query()
-  
+  - df.select_dtypes()
+
 ### Grouping & Aggregation
+
+    Aggregation is done by using the 'groupby' method and 'agg' method in combination.
+  - grouby(['columnA','columnB'])
+  - agg(['mean','median','sum','prod','std','var','max','min','count','describe','nunique',])
 
 ### Merging
 
+  - pd.concat
+  - df.append
+  - df.merge
+  - df.join
+
 ### Modification
+  - Modifying column name: 
+    - df.columns = ['columnA','columnB',...]
+    - df.rename(columns={})
+  - Modifying index:
+    - df.set_index('index_column',inplace = True): use a column as the nex index
+    - df.reset_index(inplace = True, , drop = True): reset index to defalt
+  - Modifying a column:
+    - df.apply(lambda): can be used for multiple columns
+    - df.map(lambda): only for Series
+  - Modifying all cells:
+    - df.applymap(lambda)
 
 ### Handling Missing Data
 
