@@ -50,6 +50,7 @@ This notebook contains frequently used Pandas commands for data preprocessing an
 - df.info(): summary of dataframe
 - df.describe(): return statistics of numeric columns
 - df.dtypes: return data types of each column
+- df.corr: get correlation coefficients
 
 ### Filtering & Indexing
 
@@ -59,6 +60,7 @@ This notebook contains frequently used Pandas commands for data preprocessing an
   - df.iloc(): using integer location, exclusive when slicing, can use **_np.r\__** to represent multiple slice
   - df.loc(): using label, inclusive when slicing
 - Filtering:
+  - ['columnA']
   - boolean indexing
   - df.query()
   - df.select_dtypes()
@@ -84,11 +86,26 @@ This notebook contains frequently used Pandas commands for data preprocessing an
     - df.set_index('index_column',inplace = True): use a column as the nex index
     - df.reset_index(inplace = True, , drop = True): reset index to defalt
   - Modifying a column:
-    - df.apply(lambda): can be used for multiple columns
+    - df.apply(lambda, axis=1): can be used for multiple columns
     - df.map(lambda): only for Series
   - Modifying all cells:
     - df.applymap(lambda)
 
 ### Handling Missing Data
-
+  - Checking missing values:
+    - pd.isnull(df) or pd.isna(df)
+    - df.isnull() or df.isna()
+  - Filling missing values:
+    - df.fillna()
+    - sklearn imputation
+    
 ### Handling Time Series Data
+  - Converting to datetime:
+    - pd.to_datetime()
+    - df['DateTime'].dt.year
+    - df['DateTime'].dt.month
+    - df['DateTime'].dt.day
+    - df['DateTime'].dt.week
+  - Aggregating:
+    - df.resample()
+    
